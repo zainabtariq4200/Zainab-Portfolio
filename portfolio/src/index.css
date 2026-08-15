@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #080b12;
+  --bg-elevated: #0d121e;
+  --bg-card: #0f1526;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --text: #eaf1fb;
+  --text-muted: #8b9bb4;
+  --text-dim: #5c6b85;
+  --accent-cyan: #4d8dfb;
+  --accent-teal: #1f3f73;
+  --accent-grad: linear-gradient(120deg, var(--accent-cyan), var(--accent-teal));
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow-glow: 0 0 60px rgba(77, 141, 251, 0.14);
+  --maxw: 1180px;
+  --glass-bg: rgba(16, 23, 40, 0.5);
+  --glass-bg-strong: rgba(13, 19, 34, 0.68);
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-blur: blur(18px) saturate(150%);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Sora', 'Inter', sans-serif;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+
+::selection { background: var(--accent-cyan); color: #04121a; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Custom cursor is only enabled (via body.cursor-none) on fine-pointer devices */
+body.cursor-none, body.cursor-none a, body.cursor-none button, body.cursor-none input,
+body.cursor-none textarea, body.cursor-none * { cursor: none !important; }
+
+.custom-cursor-dot, .custom-cursor-ring {
+  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+  border-radius: 50%; transform: translate(-50%, -50%);
+  transition: width .2s ease, height .2s ease, background .2s ease, border-color .2s ease, box-shadow .25s ease;
+}
+.custom-cursor-dot {
+  width: 7px; height: 7px; background: var(--accent-cyan);
+  box-shadow:
+    0 0 6px 1px rgba(77, 141, 251, 0.9),
+    0 0 16px 4px rgba(77, 141, 251, 0.55),
+    0 0 30px 8px rgba(77, 141, 251, 0.3);
+}
+.custom-cursor-dot--hover {
+  width: 10px; height: 10px; background: #eaf6ff;
+  box-shadow:
+    0 0 8px 2px rgba(120, 190, 255, 1),
+    0 0 22px 6px rgba(77, 141, 251, 0.75),
+    0 0 44px 14px rgba(77, 141, 251, 0.45);
+}
+.custom-cursor-ring {
+  width: 32px; height: 32px; border: 1.5px solid rgba(77, 141, 251, 0.65);
+  box-shadow:
+    0 0 12px 1px rgba(77, 141, 251, 0.45),
+    inset 0 0 12px 1px rgba(77, 141, 251, 0.25);
+}
+.custom-cursor-ring--hover {
+  width: 54px; height: 54px; border-color: rgba(120, 190, 255, 0.9);
+  background: rgba(77, 141, 251, 0.06);
+  box-shadow:
+    0 0 24px 4px rgba(77, 141, 251, 0.65),
+    0 0 50px 10px rgba(77, 141, 251, 0.35),
+    inset 0 0 18px 2px rgba(120, 190, 255, 0.3);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .custom-cursor-dot, .custom-cursor-ring { display: none; }
+}
+
+/* Magnetic text/button glow — subtle, only meaningful alongside the drift Magnetic.jsx applies */
+.magnetic { will-change: transform; }
+.magnetic-glow:hover { text-shadow: 0 0 22px rgba(77, 141, 251, 0.5); }
+
+/* Magnetic glow for non-text elements — photo, circles, chips, badges */
+.magnetic-glow-box:hover {
+  box-shadow: 0 0 30px rgba(77, 141, 251, 0.4);
+  border-color: rgba(77, 141, 251, 0.55) !important;
+}
+
+/* Ambient hover glow for big cards/panels — depth cue without dragging the whole card toward the cursor */
+.panel, .contact-panel, .stat-grid__item, .skill-row, .project-card {
+  transition: box-shadow .35s ease, border-color .35s ease, background .35s ease, transform .3s ease;
+}
+.panel:hover, .contact-panel:hover {
+  border-color: rgba(77, 141, 251, 0.3);
+  box-shadow: 0 0 44px rgba(77, 141, 251, 0.12);
+}
+.stat-grid__item:hover {
+  border-color: rgba(77, 141, 251, 0.4);
+  background: rgba(77, 141, 251, 0.05);
+  transform: translateY(-3px);
+}
+.skill-row:hover {
+  transform: translateX(3px);
+}
+.skill-row:hover .skill-row__top span:first-child { color: var(--accent-cyan); }
+.process__circle { transition: box-shadow .3s ease, border-color .3s ease, background .3s ease, color .3s ease; }
+.process__circle.magnetic-glow-box:hover { color: #eaf6ff; background: rgba(77, 141, 251, 0.14); }
+.hero__photo { transition: box-shadow .35s ease, border-color .35s ease; }
+.hero__tagpanel, .hero__badge { transition: box-shadow .3s ease, border-color .3s ease; }
+
