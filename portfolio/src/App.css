@@ -89,7 +89,8 @@
 
 @media (max-width: 940px) {
   .hero__inner { grid-template-columns: 1fr; }
-  .hero__badges { position: static; flex-direction: row; margin-top: 16px; flex-wrap: wrap; }
+  .hero__visual { flex-direction: column; align-items: center; }
+  .hero__badges { position: static; flex-direction: row; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
   .hero__tagpanel { position: static; margin-top: 16px; }
   .hero__desc { max-width: 100%; }
 }
@@ -239,6 +240,8 @@
   .hero__title { font-size: clamp(30px, 8vw, 42px); margin-bottom: 18px; }
   .hero__desc { font-size: 15px; margin-bottom: 26px; }
   .hero__actions { flex-wrap: wrap; }
+  .hero__copy { text-align: center; }
+  .hero__actions { justify-content: center; }
   .hero__visual { margin-top: 8px; }
   .hero__photo { max-width: 260px; border-radius: 20px; }
   .hero__tagpanel { padding: 10px 12px; font-size: 11.5px; line-height: 1.7; gap: 8px; }

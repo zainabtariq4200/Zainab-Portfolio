@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import profile from '../assets/profile.jpg'
 import { Briefcase, Camera, Mail, Code2 } from 'lucide-react'
 import Magnetic from './Magnetic'
+import useIsMobile from '../hooks/useIsMobile'
 
 const badges = [
   { value: '3', label: 'Live Projects' },
@@ -11,9 +12,10 @@ const badges = [
 
 export default function Hero() {
   const { scrollY } = useScroll()
-  const visualY = useTransform(scrollY, [0, 600], [0, 90])
-  const visualOpacity = useTransform(scrollY, [0, 500], [1, 0.35])
-  const copyY = useTransform(scrollY, [0, 600], [0, 40])
+  const isMobile = useIsMobile()
+  const visualY = useTransform(scrollY, [0, 600], isMobile ? [0, 0] : [0, 90])
+  const visualOpacity = useTransform(scrollY, [0, 500], isMobile ? [1, 1] : [1, 0.35])
+  const copyY = useTransform(scrollY, [0, 600], isMobile ? [0, 0] : [0, 40])
   return (
     <section id="home" className="hero">
       <div className="hero__inner">
